@@ -1,0 +1,11 @@
+*.pyc
+*__pycache__
+__pycache__
+./__pycache__
+app/__pycache__
+app/api/__pycache__
+app/site/__pycache__
+./.env
+
+
+

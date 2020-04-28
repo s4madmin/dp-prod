@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <v-app>
+      
+    <v-container>
+      <v-row>
+        
+          <v-col cols="12" md="4"></v-col>
+          <v-col cols="12" md="4">
+
+            <v-card class="elevation-12">
+
+              <v-toolbar
+                color="#A81C84"
+                dark
+                flat
+              >
+                <v-toolbar-title>Dataportal</v-toolbar-title>
+                <v-spacer />
+              
+              </v-toolbar>
+
+              <v-card-text>
+                <v-img
+                  
+                  src="https://dataportal-data.s3-ap-southeast-2.amazonaws.com/static/images/test_logo.PNG"
+                  alt="sm4_logo"
+                  class="white--text align-end"
+                  height="280px"
+                  fluid
+                  aspect-ratio="1"
+                >
+              </v-card-text>
+
+              <v-card-text>
+                
+                <v-form
+                  enctype="multipart/form-data"
+                  action="{{ url_for('api_login.api_login') }}" 
+                  id="loginForm" 
+                  method="POST"
+                  ref="form"
+                >
+
+                <v-text-field
+                  color="orange"
+                  label="Login"
+                  name="login"
+                  type="text"
+                  v-model="login.username"
+                ></v-text-field>
+
+                <v-text-field
+                  color="orange"
+                  id="password"
+                  label="Password"
+                  name="password"
+                  type="password"
+                  v-model="login.password"
+                ></v-text-field>
+                
+                <br>
+                <br>
+                
+                <v-btn color="#35B4CF" type="submit" tile block>
+                  <input id="submit" type="submit" class="white--text" value="LOGIN">
+                </v-btn>
+
+                </v-form>
+              </v-card-text>
+
+              <br>
+              <br>
+
+            </v-card>
+          </v-col>
+          <v-col cols="12" md="4"></v-col>
+
+      </v-row>
+    </v-container> 
+    
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        login: {
+          username: '',
+          password: '',
+        }
+      },
+    })
+  </script>
+</body>
+</html>
