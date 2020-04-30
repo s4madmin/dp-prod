@@ -1,6 +1,8 @@
 ![logo](https://dataportal-data.s3-ap-southeast-2.amazonaws.com/static/images/test_logo.PNG)
 
-# Stemformatics Dataportal API
+[![Build Status](https://travis-ci.com/s4madmin/Stemformatics-Dataportal.svg?branch=master)](https://travis-ci.com/s4madmin/Stemformatics-Dataportal)
+
+# Stemformatics Dataportal API 
 
 Source code for the [Stemformatics Dataportal](https://api.stemformatics.org/). The dataportal is a cetralised API and data store of all the datasets contained in Stemformatics. 
 The API facilitates external access to both public and private datasets. 
