@@ -8,6 +8,6 @@ install:
   - cd ..
 # command to run tests
 script:
-  - travis_build.sh
+  - bash travis_build.sh
 
   
