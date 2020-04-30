@@ -2,14 +2,12 @@
 
 # Stemformatics Dataportal API
 
-Source code for the [Stemformatics Dataportal](https://api.stemformatics.org/). The dataportal is a cetralised API of all the datasets contained in Stemformatics. 
+Source code for the [Stemformatics Dataportal](https://api.stemformatics.org/). The dataportal is a cetralised API and data store of all the datasets contained in Stemformatics. 
 The API facilitates external access to both public and private datasets. 
 
 #### See [Dataportal-documentation](http://dataportal-documentation.s3-website-ap-southeast-2.amazonaws.com/ "Documentation")
 
 ## Getting Started
-
-Clone the repo to your directory. 
 
 #### Dev/Testing:
 
@@ -30,7 +28,7 @@ docker-compose up
 Once the build completes you will need to load the PSQL and MongoDB data.
 There is a script included in the repo called "load_data.sh".
 This script downloads the appropriate dump files from an AWS S3 bucket location, the url for which will be contained in
-environment variables or .env file. If you are not authorised to download a test version of this data, you will need to provide your owm. See the documentation above for how to initialise the data. 
+environment variables or .env file. If you are not authorised to download a test version of this data, you will need to provide your own. See the [documentation](http://dataportal-documentation.s3-website-ap-southeast-2.amazonaws.com/) above for how to initialise the data. 
 
 #### Testing
 
@@ -56,7 +54,7 @@ See the [documentation](http://dataportal-documentation.s3-website-ap-southeast-
 * **Jack Bransfield** - Software Engineer, Stemformatics CSCS
 * **Jarny Choi** - Bioinformatician, Stemformatics CSCS
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](http://dataportal-documentation.s3-website-ap-southeast-2.amazonaws.com/) who participated in this project.
 
 ## License
 
