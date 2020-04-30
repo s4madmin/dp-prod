@@ -5,6 +5,7 @@ python:
 install:
   - cd flask
   - pip install -r requirements.txt
+  - cd ..
 # command to run tests
 script:
   - travis_build.sh
