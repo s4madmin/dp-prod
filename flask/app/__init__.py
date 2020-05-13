@@ -15,13 +15,23 @@ APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to applicati
 dotenv_path = os.path.join(APP_ROOT, '.env')
 load_dotenv(dotenv_path)
 
-api_app = Api(app = app, version = "1.0", 
+authorizations = {  # This dictionary tells flask_rest_plus to expect a token.
+    'apikey': {
+        'type': 'apiKey',   # Type of token will be an apikey. 
+        'in': 'header', # The location where I'm expecting the key, the header.
+        'name': 'X-API-KEY'
+    }
+} 
+
+api_app = Api(app = app, authorizations=authorizations, version = "1.0", 
 		  title = "Stemformatics API", 
-		  description = "The Stemformatics API facilitates access to all of our public datasets. \n\n Maintainer: jack.bransfield@unimelb.edu.au \n\n [Dataportal Login](https://api.stemformatics.org/dataportal)")
+		  description = "The Stemformatics API facilitates access to all of our public datasets. \n\n Maintainer: jack.bransfield@unimelb.edu.au \n\n [Dataportal Login](https://api.stemformatics.org/dataportal) \n\n [Get JWT Token](https://api.stemformatics.org/token)")
 
-dataset_name_space = api_app.namespace('samples / metadata', description='Data-types: samples, metadata ')
+public_dataset_name_space = api_app.namespace('samples / metadata', description='Data-types: samples, metadata ')
+public_dataset_expression_name_space = api_app.namespace('expression', description='Data-types: expression ')
 
-dataset_expression_name_space = api_app.namespace('expression', description='Data-types: expression ')
+private_dataset_name_space = api_app.namespace('(private) samples / metadata', description='Data-types: samples, metadata ')
+private_dataset_expression_name_space = api_app.namespace('(private) expression', description='Data-types: expression ')
 
 @property
 def specs_url(self):

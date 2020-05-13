@@ -95,7 +95,7 @@ def api_login():
         if session["user"] == username:
             if session["loggedIn"] == True:
                 admin = session["admin"]
-                token = jwt.encode({"user": username, "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  #  Expiration is a reserved part of the payload in JWT
+                token = jwt.encode({"user": username, "password": password, "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  #  Expiration is a reserved part of the payload in JWT
                 return redirect(url_for('home.home', auth=auth, admin=admin, token=token.decode('UTF-8')))
     if auth != True:
         return redirect('/login_error')
