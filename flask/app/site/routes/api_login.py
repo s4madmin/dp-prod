@@ -22,7 +22,7 @@ def token_required(f):
             return jsonify({'message': 'Token is missing!'}), 403
 
         try: 
-            data = jwt.decode(token, app.config['SECRET_KEY'])
+            jwt.decode(token, app.config['SECRET_KEY'])
         except:
             return jsonify({'Message': 'Missing or invalid token.'}), 403
         
@@ -37,6 +37,34 @@ def api_login_page():
     Renders the Dataportal login page. 
     """
     return render_template('/api/api_login.html')
+
+
+@module.route('/jwt_token')
+def api_jwt_token_page():
+    """
+    Renders the jwt_token page. 
+    """
+    return render_template('/api/token.html')
+
+
+@module.route('/api_jwt_token_generated', methods=['GET', 'POST'])
+def api_jwt_token_generated():
+    """
+    Generates the jwt_token. 
+    """
+    
+    username = request.form['username']
+    password = request.form['password']
+
+    _username = UserModel.User(username)
+    auth = _username.authenticate(username, password)
+
+    if auth == True:
+        token = jwt.encode({"user": username, "password": password, "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])  #  Expiration is a reserved part of the payload in JWT
+        return {'token': token.decode('UTF-8')}
+    if auth != True:
+        return {'message': 'not authorized'}
+ 
 
 
 @module.route('/login_error')

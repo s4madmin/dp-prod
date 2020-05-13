@@ -34,7 +34,6 @@ def token_required(f):
         payload = jwt.decode(token, app.config['SECRET_KEY'],'UTF-8')
         username = payload['user']
         password = payload['password']
-        auth = UserModel
         _username = UserModel.User(username)
         auth = _username.authenticate(username, password)
 
