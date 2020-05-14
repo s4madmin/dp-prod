@@ -1,5 +1,6 @@
 import os, pandas, json
 from flask import jsonify
+from app import app
 import psycopg2
 from . import _runSql
 from sqlalchemy import create_engine
@@ -9,16 +10,16 @@ import pymongo
 from pymongo import MongoClient
 from bson.json_util import dumps
 
-postgres_username = os.environ["POSTGRES_USERNAME"]
-postgres_password = os.environ["POSTGRES_PASSWORD"]
-postgres_database_name = os.environ["POSTGRES_DATABASE_NAME"]
-postgres_host = os.environ["POSTGRES_HOST"]
-postgres_port = os.environ["POSTGRES_PORT"]
-postgres_uri = os.environ["PSQL_URI"]
-path_to_expression_files = os.environ["PATHTOEXPRESSIONFILES"]
+postgres_username = app.config['POSTGRES_USERNAME'] # os.environ["POSTGRES_USERNAME"]
+postgres_password = app.config["POSTGRES_PASSWORD"]
+postgres_database_name = app.config["POSTGRES_DATABASE_NAME"]
+postgres_host = app.config["POSTGRES_HOST"]
+postgres_port = app.config["POSTGRES_PORT"]
+postgres_uri = app.config["PSQL_URI"]
+path_to_expression_files = app.config["PATHTOEXPRESSIONFILES"]
 conn = psycopg2.connect(postgres_uri)
 cursor = conn.cursor()
-mongo_uri = os.environ["MONGO_URI"]
+mongo_uri = app.config["MONGO_URI"]
 
 
 # ----------------------------------------------------------

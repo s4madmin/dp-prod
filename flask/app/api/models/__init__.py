@@ -1,4 +1,5 @@
 import psycopg2
+from app import app
 import os
 
 # ----------------------------------------------------------
@@ -20,14 +21,16 @@ def _runSql(sql, data=None, type="select", printSql=False):
     If printSql is True, then the actual sql being executed will be printed
     """
     
-    postgres_username = os.environ["POSTGRES_USERNAME"]
-    postgres_password = os.environ["POSTGRES_PASSWORD"]
-    postgres_database_name = os.environ["POSTGRES_DATABASE_NAME"]
-    postgres_port = os.environ["POSTGRES_PORT"]
-    postgres_uri = os.environ["PSQL_URI"]
+    postgres_username = app.config['POSTGRES_USERNAME'] # os.environ["POSTGRES_USERNAME"]
+    postgres_password = app.config["POSTGRES_PASSWORD"]
+    postgres_database_name = app.config["POSTGRES_DATABASE_NAME"]
+    postgres_host = app.config["POSTGRES_HOST"]
+    postgres_port = app.config["POSTGRES_PORT"]
+    postgres_uri = app.config["PSQL_URI"]   
     conn = psycopg2.connect(postgres_uri)
     cursor = conn.cursor()
-    mongo_uri = os.environ["MONGO_URI"]
+    mongo_uri = app.config["MONGO_URI"]
+
 
     if printSql:  # To see the actual sql executed, use mogrify:
         print(cursor.mogrify(sql, data))

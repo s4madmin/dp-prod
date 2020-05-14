@@ -21,13 +21,12 @@ import gridfs
 from bson.json_util import dumps
 from app.api.models import UserModel as user
 import flask_login
+from app import app
 
 
 module = Blueprint('browse', __name__)
 
-
-mongo_uri = os.environ["MONGO_URI"]
-
+mongo_uri = app.config["MONGO_URI"]
 
 
 @module.route("/summary_table", methods=['GET', 'POST'])

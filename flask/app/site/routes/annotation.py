@@ -7,6 +7,7 @@ import pymongo
 from pymongo import MongoClient
 import flask_login
 from bson.json_util import dumps
+from app import app
 
 """
 The page that this route is rendering gets most of its functionality
@@ -14,7 +15,7 @@ The page that this route is rendering gets most of its functionality
 """
 
 module = Blueprint('annotation', __name__)
-mongo_uri = os.environ["MONGO_URI"]
+mongo_uri = app.config["MONGO_URI"]
 
 
 @module.route('/annotation')

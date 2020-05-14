@@ -4,6 +4,7 @@ from flask_restplus import Api, Resource, fields
 from werkzeug.contrib.fixers import ProxyFix
 from dotenv import load_dotenv
 import os
+from os import environ
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -14,6 +15,7 @@ login = LoginManager(app)
 APP_ROOT = os.path.join(os.path.dirname(__file__), '..')   # refers to application_top/or app root. 
 dotenv_path = os.path.join(APP_ROOT, '.env')
 load_dotenv(dotenv_path)
+app.config.from_envvar('APP_SETTINGS')
 
 authorizations = {  # This dictionary tells flask_rest_plus to expect a token.
     'apikey': {
@@ -25,7 +27,7 @@ authorizations = {  # This dictionary tells flask_rest_plus to expect a token.
 
 api_app = Api(app = app, authorizations=authorizations, version = "1.0", 
 		  title = "Stemformatics API", 
-		  description = "The Stemformatics API facilitates access to all of our public datasets. \n\n Maintainer: jack.bransfield@unimelb.edu.au \n\n [Dataportal Login](https://api.stemformatics.org/dataportal) \n\n [Get JWT Token](https://api.stemformatics.org/token)")
+		  description = "The Stemformatics API facilitates access to all of our public datasets. \n\n Maintainer: jack.bransfield@unimelb.edu.au \n\n [Dataportal Login](https://api.stemformatics.org/dataportal) \n\n [Get JWT Token](https://api.stemformatics.org/jwt_token)")
 
 public_dataset_name_space = api_app.namespace('samples / metadata', description='Data-types: samples, metadata ')
 public_dataset_expression_name_space = api_app.namespace('expression', description='Data-types: expression ')

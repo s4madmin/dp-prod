@@ -5,10 +5,11 @@ from flask import Flask, session, Blueprint, render_template, request, Response,
 from app.api.models import datasets, UserModel, _runSql
 import pymongo
 from bson.json_util import dumps
+from app import app
 
 
 module = Blueprint('governance', __name__)
-mongo_uri = os.environ["MONGO_URI"]
+mongo_uri = app.config["MONGO_URI"]
 
 
 @module.route('/governance')
