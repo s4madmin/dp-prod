@@ -8,7 +8,7 @@ from flask import request, Response, Blueprint, session
 from app.api.models import datasets
 from app.api.models import datasets
 from flask_restplus import Resource, Api
-from app import public_dataset_name_space, public_dataset_expression_name_space, private_dataset_name_space, private_dataset_expression_name_space, api_app
+from app import lookup_dataset_name_space, public_dataset_name_space, public_dataset_expression_name_space, private_dataset_name_space, private_dataset_expression_name_space, api_app
 from app.api.models import datasets, UserModel, _runSql
 from flask_jwt import jwt_required, JWT
 from functools import wraps
@@ -43,6 +43,30 @@ def token_required(f):
         return f(*args, **kwargs)
     return decorated
 
+
+###########################################################################################################################################
+#Lookup dataset APIs
+###########################################################################################################################################
+
+
+@lookup_dataset_name_space.route("/<int:datasetId>")	# This is how you can define your API in the swagger documentation. 
+class lookupDatasetClass(Resource):
+
+    @api_app.doc(responses={ 200: 'OK', 400: 'Invalid Argument', 500: 'Mapping Key Error'})
+    def get(self, datasetId):
+        """
+        Returns samples or metadata files for a dataset, expects: {dataset_id}/{data_type} where data_type is either 'samples' or 'metadata'.
+        """
+        ds = datasets.Dataset(datasetId)
+        json_string = ds.isPrivate()
+        json_object = json.loads(json_string)
+        result = json_object[0]
+
+        if result['datasets'][0]['private'] == True:
+            return Response("Private dataset"  , mimetype="text/tsv", headers={"Content-disposition": datasetId})
+        elif result['datasets'][0]['private'] == False:
+            return Response("Public dataset"  , mimetype="text/tsv", headers={"Content-disposition": datasetId})
+       
 ###########################################################################################################################################
 #Public dataset APIs
 ###########################################################################################################################################

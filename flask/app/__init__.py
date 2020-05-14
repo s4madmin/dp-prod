@@ -29,6 +29,8 @@ api_app = Api(app = app, authorizations=authorizations, version = "1.0",
 		  title = "Stemformatics API", 
 		  description = "The Stemformatics API facilitates access to all of our public datasets. \n\n Maintainer: jack.bransfield@unimelb.edu.au \n\n [Dataportal Login](https://api.stemformatics.org/dataportal) \n\n [Get JWT Token](https://api.stemformatics.org/jwt_token)")
 
+lookup_dataset_name_space = api_app.namespace('lookup', description='Check a datasets status (public/private)')
+
 public_dataset_name_space = api_app.namespace('samples / metadata', description='Data-types: samples, metadata ')
 public_dataset_expression_name_space = api_app.namespace('expression', description='Data-types: expression ')
 
