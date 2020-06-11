@@ -107,18 +107,17 @@ class publicDatasetExpressionClass(Resource):
         """
         dataType = "expression"
         key = key
+        
         ds = datasets.Dataset(datasetId)
         json_string = ds.isPrivate()
         json_object = json.loads(json_string)
         result = json_object[0]
 
-        print("debugging:")
-        print(result)
-
         if result['datasets'][0]['private'] == True:
             return Response("Error: Private dataset", mimetype="text/tsv", headers={"Content-disposition": datasetId})
 
         json_string = ds.expressionMatrix(key=key).to_json(orient="split")
+      
         result = Response(json_string, mimetype="text/csv", headers={"Content-disposition": key})
         return result
 
@@ -171,7 +170,7 @@ class privateDatasetExpressionClass(Resource):
         result = json_object[0]
 
         print("debugging:")
-        print(result)
+        print(json_object)
 
         # if result['datasets'][0]['private'] == True:
         #     return Response("Error: Private dataset", mimetype="text/tsv", headers={"Content-disposition": datasetId})

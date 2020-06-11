@@ -65,7 +65,7 @@ class Dataset(object):
     def isPrivate(self):
         """Return true if this dataset is private.
         """
-        myclient = pymongo.MongoClient(mongo_uri) # Mongon container name is 'mongo'. # local mongodb server.   # Connects to the mongodb daabase and returns everything.
+        myclient = pymongo.MongoClient(mongo_uri) # Mongo container name is 'mongo'. # local mongodb server.   # Connects to the mongodb daabase and returns everything.
         database = myclient["dataportal_prod_meta"]
         collection = database["datasets"]
         result = collection.find({"dataset_id": self.datasetId})
@@ -223,7 +223,7 @@ class Dataset(object):
         return {"Updated": value, "Original": value_from}
             
     # expression data -------------------------------------
-    def expressionMatrix(self, key="raw"):
+    def expressionMatrix(self, key):
         """Return expression matrix for this dataset as a pandas DataFrame.
         Ran the following code and found that for this dataset (58302,24), it took 0.167 sec using read_csv and 0.127 sec using read_hdf
         (on my laptop).
@@ -236,10 +236,10 @@ class Dataset(object):
         print(time.time()-t1)
         """
         if key not in self._expressionMatrix:
-            self._expressionMatrix[key] = pandas.read_csv(self.expressionFilePath(), sep="\t", index_col=0)
+            self._expressionMatrix[key] = pandas.read_csv(self.expressionFilePath(key), sep="\t", index_col=0)
         return self._expressionMatrix[key]
         
-    def expressionFilePath(self, key="raw"):
+    def expressionFilePath(self, key):
         """Return the full path to the expression file.
         """
         return os.path.join(path_to_expression_files, "%s.%s.tsv" % (self.datasetId,key))
