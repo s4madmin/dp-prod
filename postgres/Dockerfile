@@ -24,7 +24,7 @@ USER postgres
 # Note: here we use ``&&\`` to run commands one after the other - the ``\``
 #       allows the RUN command to span multiple lines.
 RUN    /etc/init.d/postgresql start &&\
-    psql --command "CREATE USER portaladmin WITH SUPERUSER PASSWORD 'password1';" &&\
+    psql --command "CREATE USER <username> WITH SUPERUSER PASSWORD '<the_password>';" &&\
     createdb -O portaladmin dataportal
 
 # Adjust PostgreSQL configuration so that remote connections to the

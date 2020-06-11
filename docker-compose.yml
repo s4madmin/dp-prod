@@ -8,12 +8,12 @@ services:
         volumes:
             - ./postgres/postgres-volume:/var/lib/postgresql/data
         restart: always 
-        env_file:
-            - ./.env
-        environment:
-            PSQL_CREATE_COMMAND: ${PSQL_CREATE_COMMAND}
-            POSTGRES_USERNAME: ${POSTGRES_USERNAME}
-            POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
+        # env_file:
+        #     - ./.env
+        # environment:
+        #     PSQL_CREATE_COMMAND: ${PSQL_CREATE_COMMAND}
+        #     POSTGRES_USERNAME: ${POSTGRES_USERNAME}
+        #     POSTGRES_DATABASE_NAME: ${POSTGRES_DATABASE_NAME}
         expose: 
              - 5432
 
