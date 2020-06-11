@@ -32,8 +32,6 @@ services:
         build: ./flask  
         container_name: flask 
         restart: always 
-        env_file:
-            - ./.env
         environment:
             - APP_SETTINGS=/client-volume/data/production_config.cfg
         volumes:

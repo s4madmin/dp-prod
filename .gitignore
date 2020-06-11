@@ -1,4 +1,8 @@
 *.pyc
+*.cfg
+*.sh
+*.bash
+*.timestamp
 *__pycache__
 __pycache__
 ./__pycache__
