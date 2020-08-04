@@ -33,6 +33,23 @@ database = myclient["dataportal_prod_meta"]
 collection = database["datasets"]
 
 
+@module.route("/visualisations", methods=['GET', 'POST'])
+@lru_cache(maxsize=32)  # Caches the returned value of this function so we dont have to keep re-calling it. 
+def visualisations():
+    cursor = collection.find({})
+    _dict_list = []
+    
+    for item in cursor:
+        print(item['sample_types'])
+        dataset_id = item['dataset_id']
+        # sample_types = item['datasets']
+        _dict_list.append(dataset_id)
+        
+    return dumps({"data": {
+        "dataset_id": dataset_id,
+        # "sample_types": sample_types
+    }})
+
 @module.route("/summary_table", methods=['GET', 'POST'])
 @lru_cache(maxsize=32)  # Caches the returned value of this function so we dont have to keep re-calling it. 
 def summary_table():
