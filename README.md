@@ -6,7 +6,10 @@
   
 Source code for the [Stemformatics Dataportal](https://api.stemformatics.org/). The dataportal is a centralised API and data store of all the datasets contained in Stemformatics. The API facilitates 
 external access to both public and private datasets that exist in [stemformatics](https://www.stemformatics.org/).
-  
+
+Stemformatics.org is an established data portal set up to support researchers around the world, particularly in the areas of stem cell and related fields. They can use the website to access hundreds of high quality curated gene expression datasets and perform many functions on the data relevant to their research questions. 
+
+Stemformatics Data Portal is a new project to modernise the code and infrastructure behind Stemformatics, by providing APIs to the data. It can service a wide range of use cases including biologists wanting to explore the available data based on their domains of interest, or bioinformaticians who want to download data to benchmark their methods. It seeks to go beyond simply providing data in separate containers, by creating integrated methods and ways of harmonising the sample annotation data. This will lead to more powerful queries and to discoveries based on emerging properties of the data.   
   
 #### See [Dataportal-documentation](http://dataportal-documentation.s3-website-ap-southeast-2.amazonaws.com/ "Documentation")
   
